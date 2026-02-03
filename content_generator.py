@@ -31,7 +31,7 @@ class ContentGenerator:
             raise ValueError("GEMINI_API_KEY 环境变量未设置")
 
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        self.model = genai.GenerativeModel('gemini-3-pro')
 
     def generate_daily_content(
         self,
