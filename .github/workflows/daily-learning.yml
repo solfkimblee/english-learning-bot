@@ -2,12 +2,14 @@ name: Daily Learning Generator
 
 on:
   schedule:
+    # 每天北京时间早上8点运行 (UTC 0:00)
     - cron: '0 0 * * *'
-  workflow_dispatch:
+  workflow_dispatch:  # 允许手动触发
 
 jobs:
   generate-daily-content:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,5 +29,4 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        run: |
-          python main.py
+        run: python main.py
