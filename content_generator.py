@@ -20,14 +20,14 @@ class ContentGenerator:
         self.client = genai.Client(api_key=api_key)
         self.model = "gemini-2.0-flash"
 
-    def generate_daily_content(self, day, week=1, previous_feedback=None, quiz_results=None):
+    def generate_daily_content(self, day_number, week_number=1, previous_feedback=None, quiz_results=None):
         """Generate daily learning content with adaptive difficulty"""
         themes = [
             "Daily Conversations", "Work & Business", "Travel & Transport",
             "Food & Dining", "Health & Wellness", "Entertainment & Hobbies",
             "Technology & Internet"
         ]
-        theme = themes[(day - 1) % len(themes)]
+        theme = themes[(day_number - 1) % len(themes)]
 
         feedback_instruction = ""
         if previous_feedback:
@@ -36,7 +36,7 @@ User feedback from previous lesson: "{previous_feedback}"
 Adjust difficulty based on this feedback.
 """
 
-        prompt = f"""You are an English teacher creating Day {day} content.
+        prompt = f"""You are an English teacher creating Day {day_number} content.
 Theme: {theme}
 {feedback_instruction}
 
@@ -57,10 +57,10 @@ Use markdown formatting. Include Chinese translations."""
             content = response.text
 
             return {
-                "title": f"Day {day}: {theme}",
+                "title": f"Day {day_number}: {theme}",
                 "theme": theme,
-                "day": day,
-                "week": week,
+                "day": day_number,
+                "week": week_number,
                 "date": date.today().isoformat(),
                 "content": content
             }
