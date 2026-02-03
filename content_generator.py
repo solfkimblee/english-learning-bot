@@ -47,8 +47,8 @@ class ContentGenerator:
         skills = WEEKLY_SKILLS.get(week_number, ["综合阅读"])
 
         # 获取难度调整
-        difficulty_adj = get_difficulty_adjustment(quiz_results)
         current_difficulty = DIFFICULTY_LEVELS[CURRENT_LEVEL - 1]
+        difficulty_adj = get_difficulty_adjustment(quiz_results, current_difficulty)
 
         # 构建提示
         prompt = DAILY_CONTENT_PROMPT.format(
