@@ -17,7 +17,7 @@ class ContentGenerator:
             raise ValueError("GEMINI_API_KEY environment variable not set")
 
         self.client = genai.Client(api_key=api_key)
-        self.model = "gemini-3-pro"
+        self.model = "gemini-3-pro-preview"
 
     def generate_daily_content(
         self,
