@@ -1,9 +1,9 @@
 """
-Content Generator - Generate learning content using Gemini API
+Content Generator - Generate learning content using Gemini API (New Library)
 """
 
 import os
-import google.generativeai as genai
+from google import genai
 from datetime import date
 from typing import Dict, Optional
 
@@ -16,8 +16,8 @@ class ContentGenerator:
         if not api_key:
             raise ValueError("GEMINI_API_KEY environment variable not set")
 
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-3-pro')
+        self.client = genai.Client(api_key=api_key)
+        self.model = "gemini-3-pro"
 
     def generate_daily_content(
         self,
@@ -61,12 +61,9 @@ Please generate in Chinese and include:
 Make the content engaging and educational. Use clear formatting with headers."""
 
         try:
-            response = self.model.generate_content(
-                prompt,
-                generation_config=genai.types.GenerationConfig(
-                    max_output_tokens=4000,
-                    temperature=0.7,
-                )
+            response = self.client.models.generate_content(
+                model=self.model,
+                contents=prompt
             )
 
             content = response.text
