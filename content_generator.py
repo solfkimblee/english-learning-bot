@@ -58,8 +58,8 @@ class ContentGenerator:
         # 构建提示
         prompt = DAILY_CONTENT_PROMPT.format(
             learner_name=LEARNER_NAME,
-            day_number=day_number,
-            week_number=week_number,
+            day=day_number,
+            week=week_number,
             theme=theme,
             skills=", ".join(skills),
             difficulty=current_difficulty,
